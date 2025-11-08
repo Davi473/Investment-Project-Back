@@ -1,0 +1,38 @@
+{
+  "name": "project-investment-back",
+  "version": "1.0.0",
+  "description": "The Investment Project centralizes all my portfolios into a single platform, making it easier to organize and track my assets, while also providing a great opportunity to learn and apply TypeScript in practice.",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest --coverage",
+    "dev": "tsx watch src/main.ts",
+    "start": "tsx src/main.ts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@types/pg": "^8.15.5",
+    "@types/qrcode": "^1.5.5",
+    "@types/speakeasy": "^2.0.10",
+    "axios": "^1.10.0",
+    "cors": "^2.8.5",
+    "express": "^5.1.0",
+    "jest": "^30.0.3",
+    "jsonwebtoken": "^9.0.2",
+    "pg": "^8.16.3",
+    "qrcode": "^1.5.4",
+    "speakeasy": "^2.0.0",
+    "yahoo-finance2": "^2.13.3"
+  },
+  "devDependencies": {
+    "@types/axios": "^0.14.4",
+    "@types/cors": "^2.8.19",
+    "@types/express": "^5.0.3",
+    "@types/jest": "^30.0.0",
+    "@types/jsonwebtoken": "^9.0.10",
+    "ts-jest": "^29.4.0",
+    "tsx": "^4.20.3",
+    "typescript": "^5.8.3"
+  }
+}

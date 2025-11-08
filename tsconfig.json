@@ -1,0 +1,21 @@
+{
+  "compilerOptions": {
+    "target": "ESNext",                      // Output moderno, suporte a features novas
+    "module": "ESNext",                      // Módulos ESNext para bundlers modernos
+    "lib": ["ESNext"],                       // Biblioteca JS para features modernas
+    "strict": true,                          // Ativa verificações estritas (recomendado)
+    "moduleResolution": "node",             
+
+    "experimentalDecorators": true,         // Ativa suporte a decorators
+    "emitDecoratorMetadata": true,         // Geralmente false para novo padrão
+    "useDefineForClassFields": true,        // Necessário para decorators ESNext e campos de classe
+
+    "esModuleInterop": true,                 // Facilita importação de módulos CommonJS
+    "forceConsistentCasingInFileNames": true,
+    "skipLibCheck": true,
+
+    "strictPropertyInitialization": false  // Opcional: evita erro se propriedades não forem inicializadas no construtor
+  },
+  "include": ["src/**/*"],                   // Ajuste para o seu código fonte
+  "exclude": ["node_modules", "dist"]       // Exclui pastas de build e dependências
+}
