@@ -29,7 +29,7 @@ export class HttpServerAdaptorExpress implements HttpServer {
       method: string, url: string,
       middlewares: Function[] = [], handler: Function
   ): Promise<void> {
-    this.app[method](url, ...middlewares, async (req: any, res: any) => {
+    this.app[method](`/api${url}`, ...middlewares, async (req: any, res: any) => {
       try {
         const request: any[] = [];
         if (parametros)

@@ -29,7 +29,7 @@ export default class WalletController
         res.status(201).json(output);
     }
 
-     @Auth()
+    @Auth()
     @Post("/account")
     async createBill(@Body() wallet: any, @UserAuth() user: any, res: any): Promise<any>
     {

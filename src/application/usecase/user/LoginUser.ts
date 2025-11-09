@@ -4,7 +4,6 @@ import { UserRepository } from "../../repositories/UserRepository";
 import { Email } from "../../../domain/vo/Email";
 import { Hash } from "../../../domain/vo/Hash";
 import UseCase from "../UseCase";
-import { Currency } from "../../../domain/vo/Currency";
 
 export class LoginUser implements UseCase {
     constructor(

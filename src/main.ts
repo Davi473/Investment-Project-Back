@@ -15,14 +15,14 @@ const passwordHasher = new PasswordHasherImpl();
 
 import { Client } from "pg";
 
-export const DB = new Client({
+const DB = new Client({
   host: "localhost",
-  user: "postgres", 
+  user: "davi", 
   password: "123",
   database: "investment",
 });
 
-export async function connectDB() {
+async function connectDB() {
   await DB.connect();
   console.log("✅ Conectado ao PostgreSQL com sucesso!");
 }
@@ -45,12 +45,11 @@ const currencyService = new CurrencyService(currencyRepository, serviceYahooFina
 //=============================
 // User Controller
 //=============================
-import { InMemoryUserRepository, InJSONUserRepository, PostgresUserRepository } from "./infrastructure/repositories/InMemoryUserRepository";
+import { InMemoryUserRepository, PostgresUserRepository } from "./infrastructure/repositories/UserRepository";
 import { RegisterUser } from "./application/usecase/user/RegisterUser";
 import { LoginUser } from "./application/usecase/user/LoginUser";
 import { GetUser } from "./application/usecase/user/GetUser";
 import UserController from "./infrastructure/controllers/UserController";
-// const userRepository = new InMemoryUserRepository();
 const userRepository = new PostgresUserRepository(DB);
 const registerUser = new RegisterUser(uuidGen, passwordHasher, userRepository);
 const loginUser = new LoginUser(passwordHasher, userRepository);
@@ -73,11 +72,10 @@ HTTP.registerRoutes(userController);
 //=============================
 // Wallet Controller
 //=============================
-import { InMemoryWalletRepository, InJSONWalletRepository, PostgresWalletRepository} from "./infrastructure/repositories/InMemoryWalletRepository";
+import { InMemoryWalletRepository, PostgresWalletRepository } from "./infrastructure/repositories/WalletRepository";
 import { CreateUseCase } from "./application/usecase/wallet/CreateUseCase";
 import { GetUseCase } from "./application/usecase/wallet/GetUseCase";
 import WalletController from "./infrastructure/controllers/WalletController";
-// const walletRepository = new InMemoryWalletRepository();
 const walletRepository = new PostgresWalletRepository(DB);
 const walletUseCase = new CreateUseCase(walletRepository, uuidGen);
 const getWalletUseCase = new GetUseCase(walletRepository, currencyService);
@@ -87,14 +85,14 @@ HTTP.registerRoutes(walletController);
 //=============================
 // Investment Controller
 //=============================
-import { InMemoryInvestmentRepository, InJSONInvestmentRepository, PostgresInvestmentRepository } from "./infrastructure/repositories/InMemoryInvestmentRepository";
+import { InMemoryInvestmentRepository, PostgresInvestmentRepository } from "./infrastructure/repositories/InMemoryInvestmentRepository";
 import { InMemoryActionRepository } from "./infrastructure/repositories/InMemoryActionRepository";
 import { SaveUseCase } from "./application/usecase/Investment/SaveUseCase";
 import { GetUseCase as InvestmentGetUseCase } from "./application/usecase/Investment/GetUseCase";
 import InvestmentController from "./infrastructure/controllers/InvestmentController";
 import { ActionService } from "./infrastructure/service/ActionService";
 // const investmentRepository = new InMemoryInvestmentRepository();
-const investmentRepository = new PostgresInvestmentRepository(DB);
+const investmentRepository = new InMemoryInvestmentRepository();
 const actionRepository = new InMemoryActionRepository();
 const actionService = new ActionService(actionRepository, serviceYahooFinance);
 const saveInvestmentUseCase = new SaveUseCase(uuidGen, investmentRepository);
@@ -105,15 +103,15 @@ HTTP.registerRoutes(investmentController);
 //=============================
 // Account Controller
 //=============================
-import { InMemoryAccountRepository } from "./infrastructure/repositories/InMemoryAccountRepository";
-import { CreateUseCase as AccountCreateUseCase } from "./application/usecase/account/CreateUseCase";
-import { GetUseCase as AccountGetUseCase } from "./application/usecase/account/GetUseCase";
-import AccountController from "./infrastructure/controllers/AccountController";
-const accountRepository = new InMemoryAccountRepository();
-const createAccountUseCase = new AccountCreateUseCase(accountRepository, uuidGen);
-const getAccountUseCase = new AccountGetUseCase(accountRepository);
-const accountController = new AccountController(createAccountUseCase, getAccountUseCase);
-HTTP.registerRoutes(accountController);
+// import { InMemoryAccountRepository } from "./infrastructure/repositories/InMemoryAccountRepository";
+// import { CreateUseCase as AccountCreateUseCase } from "./application/usecase/account/CreateUseCase";
+// import { GetUseCase as AccountGetUseCase } from "./application/usecase/account/GetUseCase";
+// import AccountController from "./infrastructure/controllers/AccountController";
+// const accountRepository = new InMemoryAccountRepository();
+// const createAccountUseCase = new AccountCreateUseCase(accountRepository, uuidGen);
+// const getAccountUseCase = new AccountGetUseCase(accountRepository);
+// const accountController = new AccountController(createAccountUseCase, getAccountUseCase);
+// HTTP.registerRoutes(accountController);
 
 //=============================
 // Investment Controller
