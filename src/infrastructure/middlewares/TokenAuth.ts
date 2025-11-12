@@ -1,7 +1,10 @@
 import { Request, Response, NextFunction } from 'express';
 import jwt from 'jsonwebtoken';
 
-const SECRET_KEY = 'segredo123';
+if (!process.env.TOKEN_KEY) {
+  throw new Error("TOKEN_KEY não definida nas variáveis de ambiente.");
+}
+const SECRET_KEY = process.env.TOKEN_KEY;
 
 export function generateToken(payload: {}): string {
   return jwt.sign(payload, SECRET_KEY, {expiresIn: "1d"});

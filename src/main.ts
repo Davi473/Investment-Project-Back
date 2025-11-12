@@ -4,6 +4,7 @@
 import { HttpServerAdaptorExpress } from "./infrastructure/http/HttpServer";
 import { UUIDGeneratorImpl } from "./domain/vo/UUIDGeneratorImpl";
 import { PasswordHasherImpl } from "./domain/vo/PasswordHasherImpl";
+import "dotenv/config";
 const HTTP = new HttpServerAdaptorExpress();
 const PORT = 3000;
 const uuidGen = new UUIDGeneratorImpl();
@@ -16,10 +17,10 @@ const passwordHasher = new PasswordHasherImpl();
 import { Client } from "pg";
 
 const DB = new Client({
-  host: "localhost",
-  user: "davi", 
-  password: "123",
-  database: "investment",
+  host: process.env.DB_HOST,
+  user: process.env.DB_USER, 
+  password: process.env.DB_PASSWORD,
+  database: process.env.DB_DATABASE,
 });
 
 async function connectDB() {
@@ -85,14 +86,13 @@ HTTP.registerRoutes(walletController);
 //=============================
 // Investment Controller
 //=============================
-import { InMemoryInvestmentRepository, PostgresInvestmentRepository } from "./infrastructure/repositories/InMemoryInvestmentRepository";
+import { PostgresInvestmentRepository } from "./infrastructure/repositories/InvestmentRepository";
 import { InMemoryActionRepository } from "./infrastructure/repositories/InMemoryActionRepository";
 import { SaveUseCase } from "./application/usecase/Investment/SaveUseCase";
 import { GetUseCase as InvestmentGetUseCase } from "./application/usecase/Investment/GetUseCase";
 import InvestmentController from "./infrastructure/controllers/InvestmentController";
 import { ActionService } from "./infrastructure/service/ActionService";
-// const investmentRepository = new InMemoryInvestmentRepository();
-const investmentRepository = new InMemoryInvestmentRepository();
+const investmentRepository = new PostgresInvestmentRepository(DB);
 const actionRepository = new InMemoryActionRepository();
 const actionService = new ActionService(actionRepository, serviceYahooFinance);
 const saveInvestmentUseCase = new SaveUseCase(uuidGen, investmentRepository);

@@ -8,16 +8,8 @@ export class PostgresInvestmentRepository implements InvestmentRepository {
 
   async save(investment: Investment): Promise<void> {
     const query = `
-    INSERT INTO investments (id, id_wallet, name, category, buy, quantity, average, created_at, currency)
+    INSERT INTO investment (id, id_wallet, name, category, buy, quantity, average, created_at, currency)
     VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)
-    ON CONFLICT (id) DO UPDATE SET
-      name = EXCLUDED.name,
-      category = EXCLUDED.category,
-      buy = EXCLUDED.buy,
-      quantity = EXCLUDED.quantity,
-      average = EXCLUDED.average,
-      created_at = EXCLUDED.created_at,
-      currency = EXCLUDED.currency;
   `;
 
     await this.db.query(query, [
@@ -34,7 +26,7 @@ export class PostgresInvestmentRepository implements InvestmentRepository {
   }
 
   async findByIdWallet(idWallet: string): Promise<Investment[] | null> {
-    const query = `SELECT * FROM investments WHERE id_wallet = $1`;
+    const query = `SELECT * FROM investment WHERE id_wallet = $1`;
     const result = await this.db.query(query, [idWallet]);
 
     if (result.rows.length === 0) return null;

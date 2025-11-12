@@ -20,3 +20,17 @@ CREATE TABLE wallet (
     type CHAR(1) NOT NULL,
     CONSTRAINT fk_user FOREIGN KEY (id_user) REFERENCES users(id)
 );
+
+-- INVESTMENT
+CREATE TABLE investment (
+    id UUID PRIMARY KEY,                              
+    id_wallet UUID NOT NULL,                          
+    name VARCHAR(100) NOT NULL,                       
+    category VARCHAR(50) NOT NULL,                      
+    buy BOOLEAN NOT NULL,                          
+    quantity NUMERIC(15, 8) NOT NULL,               
+    average NUMERIC(15, 2) NOT NULL,            
+    created_at TIMESTAMP NOT NULL DEFAULT NOW(),      
+    currency CHAR(3) NOT NULL,                         
+    CONSTRAINT fk_wallet FOREIGN KEY (id_wallet) REFERENCES wallet(id)
+);

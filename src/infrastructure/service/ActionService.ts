@@ -35,7 +35,8 @@ export class ActionService {
         const actionExist = await this.repository.findByName(action);
         if (!actionExist) {
             const actionNew = await this.service.getValueAction(action);
-            if (!actionNew.price) throw new Error(`Action ${action} no exist`);
+            console.log(actionNew);
+            /* if (actionNew.price !== 0) throw new Error(`Action ${action} no exist`); */
             const actionObject = new Action(
                 crypto.randomUUID(),
                 action,

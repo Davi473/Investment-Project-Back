@@ -34,7 +34,7 @@ export class CurrencyService {
         if (currencys.length === 0 ) return;
         for (const currency of currencys) {
             const currencyNew = await this.service.getValueAction(currency.currency);
-            if (!currencyNew.price) continue;
+            // if (!currencyNew.price) continue;
             const currencyObject = {
                 id: crypto.randomUUID(),
                 currency: currency.currency,
