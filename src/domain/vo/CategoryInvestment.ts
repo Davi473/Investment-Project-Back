@@ -7,6 +7,7 @@ enum Category {
   ETF_BRL = "ETF BRL",
   FIIS = "FIIS",
   REIT = "REIT",
+  COMODITIES = "COMODITIES"
 }
 
 export class CategoryInvestment {
@@ -17,5 +18,9 @@ export class CategoryInvestment {
       throw new Error("Category doesn't exist");
     }
     this.value = value as Category;
+  }
+
+  public getValue(): string {
+    return this.value;
   }
 }

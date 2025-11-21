@@ -1,11 +1,11 @@
 import { CurrencyRepository } from "../../application/repositories/CurrencyRepository";
-import { YahooFinanceService } from "./YahooFinanceService";
+import IMarketDataProvider from "./IMarketDataProvider";
 
 export class CurrencyService {
 
     constructor(
         private repository: CurrencyRepository,
-        private service: YahooFinanceService
+        private service: IMarketDataProvider
     ) {
         this.init();
         this.repeat();

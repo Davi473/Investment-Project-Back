@@ -32,8 +32,8 @@ connectDB()
 //=============================
 // Yahoo Finance Service
 //=============================
-import { YahooFinanceService } from "./infrastructure/service/YahooFinanceService";
-const serviceYahooFinance = new YahooFinanceService();
+import { YahooFinanceService, FinnhubService } from "./infrastructure/service/IMarketDataProvider";
+const serviceYahooFinance = new FinnhubService();
 
 //=============================
 // Currency Service

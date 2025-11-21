@@ -1,13 +1,12 @@
 import { ActionRepository } from "../../application/repositories/ActionRepository";
-import yahooFinance from "yahoo-finance2";
 import { Action } from "../../domain/entity/Action";
-import { YahooFinanceService } from "./YahooFinanceService";
+import IMarketDataProvider from "./IMarketDataProvider";
 
 export class ActionService {
 
     constructor(
         private repository: ActionRepository,
-        private service: YahooFinanceService
+        private service: IMarketDataProvider
     ) {
         this.init();
 

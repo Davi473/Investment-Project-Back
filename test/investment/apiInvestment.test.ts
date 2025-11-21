@@ -2,7 +2,7 @@
 
 test("Wallet API - Create Wallet", async () => {
     const user = {
-        nickname: "johnDoe",
+        nickname: "john Doe",
         email: `${Math.random()}@example.com`,
         password: "securePassword123"
     }
